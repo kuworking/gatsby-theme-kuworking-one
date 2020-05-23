@@ -1,20 +1,20 @@
 /** @jsx jsx */
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import { jsx } from 'theme-ui'
-import { TextShadow } from 'gatsby-theme-kuworking-core'
+import { TextShadow } from 'gatsby-theme-kuworking-methods'
 
 export const Cta = () => {
-  const refForWidth = useRef()
+  const { innerWidth: width } = typeof window !== 'undefined' && window
   const [shadow, setShadow] = useState({ textShadow: '1px 1px 1px #000, 3px 3px 1px #ff00e2, 5px 5px 1px #ededed' })
-  useEffect(() => {
-    if (refForWidth.current.clientWidth > 800)
-      setShadow({ textShadow: '1px 1px 1px #000, 5px 5px 5px #ff00e2, 10px 10px 1px #ededed' })
+
+  useLayoutEffect(() => {
+    if (width > 800) setShadow({ textShadow: '1px 1px 1px #000, 5px 5px 5px #ff00e2, 10px 10px 1px #ededed' })
   }, [])
 
   return (
-    <Container sx={{ variant: 'copy' }} ref={refForWidth}>
-      <h1>
+    <Container>
+      <h1 sx={{ fontSize: ['4rem', '5rem', '6rem'] }}>
         <TextShadow
           view={false}
           delay="50"
